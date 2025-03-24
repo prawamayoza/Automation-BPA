@@ -1,7 +1,7 @@
 const { defineConfig } = require("cypress");
 const dayjs = require('dayjs');
 const today = dayjs().format('YYYY-MM-DD');
-const currentTime = dayjs().format('HH-mm-ss');
+const currentTime = dayjs().format('HHmm');
 
 
 module.exports = defineConfig({
@@ -9,7 +9,7 @@ module.exports = defineConfig({
   reporterOptions: {
     reportDir: `cypress/reports/${today}`,
     overwrite: false,
-    html: true,
+    html: false,
     json: true,
     reportFilename: `[name]-report-${currentTime}`
   },

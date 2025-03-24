@@ -33,7 +33,7 @@ describe('read',()=> {
 
     it('should display detail of inspection form to Button More',()=>{
         // ubah nomor inspeksi sesuai dengan nomor inspeksi yang ingin dilihat detailnya
-        cy.contains('p.chakra-text', 'CR202500230', { timeout: 10000 })
+        cy.contains('p.chakra-text', 'CR202500264', { timeout: 10000 })
         .should('be.visible')
         .click({ force: true });
 
