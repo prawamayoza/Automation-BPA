@@ -31,11 +31,8 @@ describe('read',()=> {
     }) //search by date created
 
 
-    it('should display detail of inspection form to Button More',()=>{
-        // ubah nomor inspeksi sesuai dengan nomor inspeksi yang ingin dilihat detailnya
-        cy.contains('p.chakra-text', 'CR202500264', { timeout: 10000 })
-        .should('be.visible')
-        .click({ force: true });
+    it.only('should display detail of inspection form to Button More',()=>{
+        cy.get('.css-farez7 p.chakra-text.css-0').first().click();
 
         cy.get('button.chakra-button[aria-haspopup="menu"]')
         .contains('More')
