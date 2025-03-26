@@ -1,8 +1,4 @@
 describe('read page inspection form builder',()=> {
-    beforeEach(() =>  {
-        cy.login();
-    });
-
     it('should display of data form builder', () => {
         cy.contains('.css-1m6080r','Inspection Form Builder').click();
     });

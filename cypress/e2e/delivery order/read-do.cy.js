@@ -1,9 +1,4 @@
 describe('read page delivery order', () => {
-    beforeEach(() => {
-        cy.login();
-        cy.wait(2000); // Menambahkan jeda setelah login
-    });
-
     it('should display of data delivery order', () => {
         cy.contains('.css-1m6080r', 'Fulfillment').click({ force: true });
         cy.wait(2000); // Menambahkan jeda setelah klik

@@ -21,3 +21,9 @@ Cypress.on('uncaught:exception', (err, runnable) => {
     }
     return true;
   });
+
+// Global beforeEach — otomatis dijalankan sebelum setiap it()
+beforeEach(() => {
+  cy.login();
+  cy.navigateToInspectionList();
+});
