@@ -32,7 +32,7 @@ describe('read',()=> {
 
 
     it.only('should display detail of inspection form to Button More',()=>{
-        cy.get('.css-farez7 p.chakra-text.css-0').first().click();
+        cy.get('.css-farez7 p.chakra-text.css-0').first().click( );
 
         cy.get('button.chakra-button[aria-haspopup="menu"]')
         .contains('More')
