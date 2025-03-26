@@ -24,9 +24,9 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 Cypress.Commands.add('login', () => {
-    cy.visit('https://app.bpa.sg/auth/signin');
+    cy.visit('https://bpa-master.girudo.id/auth/signin');
     cy.get('#identifier').type('rezkya@wolinventures.com');
     cy.get('#password').type('Test1234');
     cy.get('button[label="Login"]').click();
-    cy.url().should('include','https://app.bpa.sg/');
+    cy.url().should('include','https://bpa-master.girudo.id/');
   });
