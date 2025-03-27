@@ -1,15 +1,24 @@
 describe('read page delivery order', () => {
     it('should display of data delivery order', () => {
-        cy.contains('.css-1m6080r', 'Fulfillment').click({ force: true });
-        cy.wait(2000); // Menambahkan jeda setelah klik
+        cy.contains('.css-1m6080r', 'Fulfillment')
+        .scrollIntoView()
+        .should('be.visible')
+        .wait(500)
+        .click();
+        // Tunggu hingga halaman Fulfillment benar-benar muncul
+        cy.url().should('include', 'https://bpa-master.girudo.id/fulfillment/delivery-order');  // Pastikan URL berubah
+        cy.contains('p.chakra-text.css-tzqku2', 'fulfillment', { timeout: 10000 }).should('be.visible');
     });
 
     it('should display data delivery order search by number DO', () => {
-        cy.contains('.css-1m6080r', 'Fulfillment').click({ force: true });
-        cy.wait(2000); // Menambahkan jeda setelah klik
-
-        cy.contains('b.chakra-text', 'Fulfillment').should('be.visible');
-        cy.wait(2000); // Menunggu elemen muncul
+        cy.contains('.css-1m6080r', 'Fulfillment')
+        .scrollIntoView()
+        .should('be.visible')
+        .wait(500)
+        .click();
+        // Tunggu hingga halaman Fulfillment benar-benar muncul
+        cy.url().should('include', 'https://bpa-master.girudo.id/fulfillment/delivery-order');  // Pastikan URL berubah
+        cy.contains('p.chakra-text.css-tzqku2', 'fulfillment', { timeout: 10000 }).should('be.visible');
 
         const doNumber = 'DO/202500226';
         cy.get('input[placeholder="Search Form"]')
@@ -31,8 +40,14 @@ describe('read page delivery order', () => {
     });
 
     it('should display detail data delivery order', () => {
-        cy.contains('.css-1m6080r', 'Fulfillment').click({ force: true });
-        cy.wait(2000); // Menambahkan jeda setelah klik
+        cy.contains('.css-1m6080r', 'Fulfillment')
+        .scrollIntoView()
+        .should('be.visible')
+        .wait(500)
+        .click();
+        // Tunggu hingga halaman Fulfillment benar-benar muncul
+        cy.url().should('include', 'https://bpa-master.girudo.id/fulfillment/delivery-order');  // Pastikan URL berubah
+        cy.contains('p.chakra-text.css-tzqku2', 'fulfillment', { timeout: 10000 }).should('be.visible');
 
         cy.contains('b.chakra-text', 'Fulfillment').should('be.visible');
         cy.wait(2000); // Menunggu elemen muncul
