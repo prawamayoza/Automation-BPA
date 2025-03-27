@@ -5,6 +5,7 @@ const currentTime = dayjs().format('HHmm');
 
 
 module.exports = defineConfig({
+  projectId: 'f9h5cq',
   reporter: 'mochawesome',
   reporterOptions: {
     reportDir: `cypress/reports/${today}`,

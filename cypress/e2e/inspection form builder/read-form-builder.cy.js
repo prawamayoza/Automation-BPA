@@ -3,7 +3,7 @@ describe('read page inspection form builder',()=> {
         cy.contains('.css-1m6080r','Inspection Form Builder').click();
     });
 
-    it.only('should display data form builder search by name ', () => {
+    it('should display data form builder search by name ', () => {
     // Step 1: Masuk ke halaman Inspection Form Builder
     cy.contains('.css-1m6080r', 'Inspection Form Builder').click();
     
@@ -30,8 +30,12 @@ describe('read page inspection form builder',()=> {
         });
     });
 
-    it.only('should display detail data form builder',()=>{
-        
+    it('should display detail data form builder',()=>{
+        cy.contains('.css-1m6080r', 'Inspection Form Builder').click();
+        cy.contains('b.chakra-text', 'Inspection Form Builder').should('be.visible');
+        cy.contains('div.css-j7qwjs p.chakra-text.css-0', 'Checklist For Checking Electricity of Home').click();
+
+
 
     });
 
