@@ -1,8 +1,15 @@
-const fs = require('fs');
+const fs = require('fs'); 
 const path = require('path');
 
-const reportsPath = path.join(__dirname, '../reports');
-const latestReportDir = fs.readdirSync(reportsPath)
+const device = process.env.DEVICE || 'desktop';
+const reportsRoot = path.join(__dirname, '../reports', device);
+
+if (!fs.existsSync(reportsRoot)) {
+  console.log(`❌ Tidak ada folder laporan untuk device '${device}' ditemukan.`);
+  process.exit(1);
+}
+
+const latestReportDir = fs.readdirSync(reportsRoot)
   .filter(name => /^\d{4}-\d{2}-\d{2}$/.test(name))
   .sort()
   .reverse()[0];
@@ -12,10 +19,15 @@ if (!latestReportDir) {
   process.exit(1);
 }
 
-const latestReportPath = path.join(reportsPath, latestReportDir);
+const latestReportPath = path.join(reportsRoot, latestReportDir);
 const reportFiles = fs.readdirSync(latestReportPath)
   .filter(file => file.endsWith('.json'))
   .sort((a, b) => b.match(/(\d{4})\.json$/)[1] - a.match(/(\d{4})\.json$/)[1]);
+
+if (reportFiles.length === 0) {
+  console.log('❌ Tidak ada file JSON ditemukan untuk dir: ', latestReportPath);
+  process.exit(1);
+}
 
 const latestTimestamp = reportFiles[0].match(/-(\d{4})\.json$/)[1];
 const latestReports = reportFiles.filter(file => file.includes(`-${latestTimestamp}.json`));
@@ -25,7 +37,7 @@ const reportTime = now.getHours().toString().padStart(2, '0') + now.getMinutes()
 
 let totalTests = 0, totalPassing = 0, totalFailing = 0, totalPending = 0, totalSkipped = 0;
 let totalDuration = 0;
-let htmlContent = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Test Summary</title><style>body{font-family: Arial, sans-serif; margin: 20px;} table{width: 100%; border-collapse: collapse; margin-top: 20px;} th, td{border: 1px solid #ddd; padding: 8px; text-align: center;} th{background-color: #f2f2f2;} .scenario-title{font-weight: bold; text-align: left;} .error-message{color: red; text-align: left; margin-top: 5px;}</style></head><body><h1>Test Summary (${latestReportDir} - ${reportTime})</h1><table><thead><tr><th>Spec</th><th>Scenarios</th><th>Tests</th><th>Passing</th><th>Failing</th><th>Pending</th><th>Skipped</th><th>Duration (s)</th></tr></thead><tbody>`;
+let htmlContent = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Test Summary - ${device}</title><style>body{font-family: Arial, sans-serif; margin: 20px;} table{width: 100%; border-collapse: collapse; margin-top: 20px;} th, td{border: 1px solid #ddd; padding: 8px; text-align: center;} th{background-color: #f2f2f2;} .scenario-title{font-weight: bold; text-align: left;} .error-message{color: red; text-align: left; margin-top: 5px;}</style></head><body><h1>Test Summary (${device} - ${latestReportDir} - ${reportTime})</h1><table><thead><tr><th>Spec</th><th>Scenarios</th><th>Tests</th><th>Passing</th><th>Failing</th><th>Pending</th><th>Skipped</th><th>Duration (s)</th></tr></thead><tbody>`;
 
 latestReports.forEach(file => {
   const report = JSON.parse(fs.readFileSync(path.join(latestReportPath, file), 'utf8'));
