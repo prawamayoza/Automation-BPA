@@ -14,7 +14,7 @@ describe('read page Quotation', () => {
         .wait(500)
         .click();
 
-        cy.url().should('include', 'https://bpa-master.girudo.id/quotation/outbound');  // Pastikan URL berubah
+        cy.url().should('include', '/quotation/outbound');  // Pastikan URL berubah
         cy.wait(1000); 
         cy.get('.css-farez7').first().click();
     });

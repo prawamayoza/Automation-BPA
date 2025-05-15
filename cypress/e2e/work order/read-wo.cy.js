@@ -6,7 +6,7 @@ describe('read page work order', () => {
         .wait(500)
         .click();
         // Tunggu hingga halaman Fulfillment benar-benar muncul
-        cy.url().should('include', 'https://bpa-master.girudo.id/fulfillment/delivery-order');  // Pastikan URL berubah
+        cy.url().should('include', '/fulfillment/delivery-order');  // Pastikan URL berubah
         cy.contains('p.chakra-text.css-tzqku2', 'fulfillment', { timeout: 10000 }).should('be.visible');
         cy.get('.css-s9z86k')
         .should('contain.text', 'Work Order') // Pastikan teks ada
@@ -23,7 +23,7 @@ describe('read page work order', () => {
         .wait(500)
         .click();
         // Tunggu hingga halaman Fulfillment benar-benar muncul
-        cy.url().should('include', 'https://bpa-master.girudo.id/fulfillment/delivery-order');  // Pastikan URL berubah
+        cy.url().should('include', '/fulfillment/delivery-order');  // Pastikan URL berubah
         cy.contains('p.chakra-text.css-tzqku2', 'fulfillment', { timeout: 10000 }).should('be.visible');
         cy.get('.css-s9z86k')
         .should('contain.text', 'Work Order') // Pastikan teks ada

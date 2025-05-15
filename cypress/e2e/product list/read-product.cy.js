@@ -14,7 +14,7 @@ describe('read page product list', () => {
         .wait(500)
         .click();
 
-        cy.url().should('include', 'https://bpa-master.girudo.id/product-list');  // Pastikan URL berubah
+        cy.url().should('include', '/product-list');  // Pastikan URL berubah
         cy.wait(1000); 
         cy.get('div.css-1o26186')
         .find('button[aria-label="view-button"]')

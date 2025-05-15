@@ -14,7 +14,7 @@ describe('read page Receipt', () => {
         .wait(500)
         .click();
 
-        cy.url().should('include', 'https://bpa-master.girudo.id/receipt/outbound');  // Pastikan URL berubah
+        cy.url().should('include', '/receipt/outbound');  // Pastikan URL berubah
         cy.wait(1000);
         cy.get('.css-1w6xs8w', { timeout: 10000 })
         .should('be.visible')

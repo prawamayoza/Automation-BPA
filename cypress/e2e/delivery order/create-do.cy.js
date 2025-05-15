@@ -7,7 +7,7 @@ describe('create page delivery order', () => {
         .click();
       
         // Tunggu hingga halaman Fulfillment benar-benar muncul
-        cy.url().should('include', 'https://bpa-master.girudo.id/fulfillment/delivery-order');  // Pastikan URL berubah
+        cy.url().should('include', '/fulfillment/delivery-order');  // Pastikan URL berubah
         cy.contains('p.chakra-text.css-tzqku2', 'fulfillment', { timeout: 10000 }).should('be.visible');
         
         // Setelah halaman muncul, klik tombol "Add New"

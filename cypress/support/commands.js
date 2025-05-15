@@ -24,16 +24,16 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 Cypress.Commands.add('login', () => {
-  cy.visit('https://bpa-master.girudo.id/auth/signin');
+  cy.visit('/auth/signin'); // Menggunakan path relatif, baseUrl akan ditambahkan secara otomatis
   cy.get('#identifier').type('rezkya@wolinventures.com');
   cy.get('#password').type('Test1234');
   cy.get('button[label="Login"]').click();
-  cy.url().should('include', 'https://bpa-master.girudo.id/');
+  cy.url().should('eq', Cypress.config('baseUrl')); // Memastikan URL adalah baseUrl setelah login
 });
 // Navigasi ke halaman inspection-list setelah login
 Cypress.Commands.add('navigateToInspectionList', () => {
   cy.url().then((url) => {
-      if (url === 'https://bpa-master.girudo.id/') {
+      if (url === Cypress.config('baseUrl')) { // Membandingkan dengan baseUrl yang dikonfigurasi
           cy.contains('a', 'Inspection', { timeout: 10000 }).click();
           cy.url().should('include', '/inspection-list');
       }

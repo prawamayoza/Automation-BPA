@@ -22,6 +22,7 @@ module.exports = defineConfig({
     reportFilename: `[name]-report-${currentTime}`
   },
   e2e: {
+    baseUrl: 'https://web.staging.bpa.sg/',
     viewportWidth: viewports[device].width,
     viewportHeight: viewports[device].height,
     defaultCommandTimeout: 15000,
