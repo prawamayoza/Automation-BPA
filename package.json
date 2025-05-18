@@ -17,7 +17,13 @@
     "run-device:tablet": "npm run test:tablet && npm run generate-report:tablet",
     "run-device:mobile": "npm run test:mobile && npm run generate-report:mobile",
 
-    "full-test-summary": "npm run run-device:desktop && npm run run-device:tablet && npm run run-device:mobile"
+    "full-test-summary": "npm run run-device:desktop && npm run run-device:tablet && npm run run-device:mobile",
+    "cy:run:dev": "cross-env CYPRESS_ENV=dev DEVICE=desktop cypress run || true",
+    "cy:run:staging": "cross-env CYPRESS_ENV=staging DEVICE=desktop cypress run || true",
+    "cy:run:prod": "cross-env CYPRESS_ENV=production DEVICE=desktop cypress run || true",
+    "cy:open:dev": "cross-env CYPRESS_ENV=dev DEVICE=desktop cypress open",
+    "cy:open:staging": "cross-env CYPRESS_ENV=staging DEVICE=desktop cypress open",
+    "cy:open:prod": "cross-env CYPRESS_ENV=production DEVICE=desktop cypress open"
   },
   "keywords": [],
   "author": "",

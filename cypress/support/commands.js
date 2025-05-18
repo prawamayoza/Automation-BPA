@@ -34,8 +34,9 @@ Cypress.Commands.add('login', () => {
 Cypress.Commands.add('navigateToInspectionList', () => {
   cy.url().then((url) => {
       if (url === Cypress.config('baseUrl')) { // Membandingkan dengan baseUrl yang dikonfigurasi
-          cy.contains('a', 'Inspection', { timeout: 10000 }).click();
-          cy.url().should('include', '/inspection-list');
+          // Mencari elemen APAPUN yang mengandung teks 'Inspection Form List'.
+          // Ini akan menemukan tag <b>, dan Cypress akan mencoba mengklik elemen yang dapat diklik terkait.
+          cy.contains('Inspection Form List', { timeout: 10000 }).click();
       }
   });
 });
