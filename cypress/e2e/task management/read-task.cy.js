@@ -1,18 +1,16 @@
 describe('Task Management Page Functionality', () => {
     beforeEach(() => {
+        cy.login(); // Panggil custom command login
         cy.contains('.css-1m6080r', 'Task Management')
             .scrollIntoView()
             .should('be.visible')
             .click();
 
         cy.url().should('include', '/task-management', { timeout: 10000 });
-        // Click the specific "Table View" tab element
-        // Assuming 'div.css-j2myvy' is the clickable element for the "Table View" tab
         cy.get('div.css-j2myvy', { timeout: 10000 })
             .should('contain.text', 'Table View') // Ensure it's the correct tab
             .should('be.visible')
             .click();
-        // Verify that the option to switch to "Calendar View" is visible, indicating Table View is active or page is responsive
         cy.get('.css-s9z86k', { timeout: 10000 }).should('contain.text', 'Calendar View').and('be.visible');
     });
 
@@ -37,9 +35,6 @@ describe('Task Management Page Functionality', () => {
             .click();
         cy.get('.css-7vo4st', { timeout: 10000 }).should('be.visible');
         cy.log('Switched to Calendar View.');
-        // Opsional: Verifikasi bahwa ada event tugas di kalender jika data diharapkan.
-        // Asumsi: Event di kalender akan muncul di dalam '.css-34v75a' dan memiliki elemen anak jika ada.
-        // cy.get('.css-7vo4st .css-34v75a').children().should('have.length.greaterThan', 0);
     });
 
     it('should display an empty calendar or no specific task events for a date range with no tasks', () => {
@@ -48,16 +43,7 @@ describe('Task Management Page Functionality', () => {
             .should('contain.text', 'Calendar View')
             .should('be.visible')
             .click();
-        cy.get('.css-7vo4st', { timeout: 10000 }).should('be.visible'); // Pastikan kontainer kalender utama terlihat
-
-        // TODO: Implementasikan langkah untuk navigasi ke rentang tanggal yang DIKETAHUI KOSONG.
-        // Ini mungkin melibatkan klik tombol "prev" atau "next" pada kalender,
-        // atau memilih tanggal dari date picker jika tersedia.
-        // cy.get('button[aria-label="next-button"]').click(); // Contoh jika ada tombol next
-        // cy.get('button[aria-label="prev-button"]').click(); // Contoh jika ada tombol prev
-
-        // Setelah navigasi ke rentang tanggal yang kosong, verifikasi bahwa tidak ada event.
-        // Asumsi: '.css-34v75a' adalah kontainer untuk event dalam satu hari. Jika kosong, tidak akan ada elemen anak.
+        cy.get('.css-7vo4st', { timeout: 10000 }).should('be.visible'); 
         cy.get('.css-7vo4st .css-34v75a', { timeout: 5000 }).children().should('have.length', 0);
         cy.log('Calendar view correctly shows no events for an empty date range.');
     });
@@ -93,8 +79,6 @@ describe('Task Management Page Functionality', () => {
             .should('be.visible')
             .clear()
             .type(`${searchTerm}{enter}`);
-
-        // Verifikasi bahwa hasil pencarian (item tugas) mengandung searchTerm.
         cy.get('.css-1qq3hyw', { timeout: 10000 })
             .should('have.length.greaterThan', 0) // Pastikan ada hasil
             .each(($taskItem) => {

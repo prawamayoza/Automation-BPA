@@ -1,5 +1,6 @@
 describe('Delivery Order Page Functionality', () => {
     beforeEach(() => {
+        cy.login(); // Panggil custom command login
         // Navigasi ke halaman Fulfillment (Delivery Order)
         cy.contains('.css-1m6080r', 'Fulfillment')
             .scrollIntoView()
